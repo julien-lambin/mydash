@@ -1,0 +1,152 @@
+<script type="text/javascript" src="../dist/js/fiche_client/fiche_client.js"></script>
+  <!-- Select2 -->
+  <link rel="stylesheet" href="../plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+  <!-- Select2 -->
+<script src="../plugins/select2/js/select2.full.min.js"></script>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card-body">
+            <form action="../dist/pdf/facture.php" id="formPec" method="post" target="_blank">
+                <div class="row">
+                    <input type="text" id="id_client" name="id_client" value="{{ id_client }}" hidden> 
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Type de matériel<font color="red"> *</font></label>
+                            <select class="form-control select2 select2-primary type" id="type" name="type">
+                                <option selected="selected">Alabama</option>
+                                <option>Alaska</option>
+                                <option>California</option>
+                                <option>Delaware</option>
+                                <option>Tennessee</option>
+                                <option>Texas</option>
+                                <option>Washington</option>
+                            </select>
+                        </div>
+                    </div> 
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Marque<font color="red"> *</font></label>
+                            <select class="form-control select2 marque" id="marque" name="marque">
+                                <option selected="selected">Alabama</option>
+                                <option>Alaska</option>
+                                <option>California</option>
+                                <option>Delaware</option>
+                                <option>Tennessee</option>
+                                <option>Texas</option>
+                                <option>Washington</option>
+                            </select>
+                        </div>
+                    </div> 
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Modéle<font color="red"> *</font></label>
+                            <select class="form-control select2 modele" id="modele" name="modele">
+                                <option selected="selected">Alabama</option>
+                                <option>Alaska</option>
+                                <option>California</option>
+                                <option>Delaware</option>
+                                <option>Tennessee</option>
+                                <option>Texas</option>
+                                <option>Washington</option>
+                            </select>
+                        </div>
+                    </div> 
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Eléments</label>
+                            <select class="form-control select2 elements_fournis" id="elements_fournis" name="elements_fournis[]" style="width:100%" multiple="multiple">
+                                <option>Alabama</option>
+                                <option>Alaska</option>
+                                <option>California</option>
+                                <option>Delaware</option>
+                                <option>Tennessee</option>
+                                <option>Texas</option>
+                                <option value="999999">Autres (A Renseigner)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                        <label for="nom">Autres éléments</label>
+                        <input type="text" class="form-control autre_elements" id="autre_elements" name="autre_elements" placeholder="Autres éléments" readonly>
+                        </div>
+                    </div>  
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label>Type de réparation<font color="red"> *</font></label>
+                            <select class="form-control select2 reparation" id="reparation" name="reparation">
+                                <option>&nbsp;</option>
+                                {% for reparation in listeReparation %}
+                                    <option value="{{ reparation.id }}" data-prix="{{ reparation.prix }}">{{ reparation.reparation }} - {{ reparation.prix }}€</option>
+                                {% endfor %}
+                                <option value="999999">Autres (A Renseigner)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                        <label for="nom">Autres type de réparation</label>
+                        <input type="text" class="form-control autre_reparation" id="autre_reparation" name="autre_reparation" placeholder="Autres type de réparation" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                    <label for="nom">Prix<font color="red"> *</font></label>
+                        <div class="input-group">
+                            <input type="text" class="form-control prix" id="prix" name="prix" placeholder="Prix" readonly>
+                            <div class="input-group-append">
+                                <div class="input-group-text"><i class="fas fa-euro-sign"></i></div>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+                <div class="row">  
+                    <div class="col-md-4">
+                        <div class="form-group">
+                        <label for="nom">Code de déverrouillage</label>
+                        <input type="text" class="form-control deverrouillage" id="deverrouillage" name="deverrouillage" placeholder="Entrez le code de déverrouillage">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                        <label for="nom">Code carte SIM</label>
+                        <input type="text" class="form-control sim" id="sim" name="sim" placeholder="Entrez le code de carte SIM" data-inputmask="'mask': ['9999', '9999']" data-mask>
+                        </div>
+                    </div> 
+                    <div class="col-md-4">
+                        <div class="form-group">
+                        <label for="nom">Code IMEI</label>
+                        <input type="text" class="form-control imei" id="imei" name="imei" placeholder="Entrez le numéro IMEI" data-inputmask="'mask': ['999999999999999', '999999999999999']" data-mask>
+                        </div>
+                    </div>  
+                </div> 
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                        <label for="nom">Numéro de Série</label>
+                        <input type="text" class="form-control num_serie" id="num_serie" name="num_serie" placeholder="Entrez le numéro de série">
+                        </div>
+                    </div>
+                </div> 
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                        <label for="nom">Info Complémentaire</label>
+                        <input type="text" class="form-control infos" id="infos" name="infos" placeholder="Entrez les informations">
+                        </div>
+                    </div> 
+                    </div> 
+                </div>
+            <!-- /.card-body -->
+
+                <div style="text-align: center;">
+                    <button type="submit" id="valideFacture" class="btn btn-primary valideFacture">Générer la PEC</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

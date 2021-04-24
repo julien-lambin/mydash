@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MyDash | Fiche Client</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
+    <!-- Toastr -->
+  <link rel="stylesheet" href="../plugins/toastr/toastr.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../dist/css/adminlte.css">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="../dist/js/fiche_client/fiche_client.js"></script>
+
+</head>
+<body class="hold-transition sidebar-mini {% if session.darkMode == "1" %}dark-mode{% endif %}">
+<!-- Site wrapper -->
+<div class="wrapper">
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Fiche client</h1>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-4">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Nouveau client</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form action="#" id="formAddClient" method="post">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="nom">Nom<font color="red"> *</font></label>
+                        <input type="text" class="form-control" id="nom" name="nom" placeholder="Entrez un nom">
+                      </div>
+                    </div> 
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="nom">Prénom<font color="red"> *</font></label>
+                        <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Entrez un prénom">
+                      </div>
+                    </div> 
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="nom">Mail<font color="red"> *</font></label>
+                        <input type="text" class="form-control" id="mail" name="mail" placeholder="Entrez une adresse mail">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">  
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="nom">Téléphone<font color="red"> *</font></label>
+                        <input type="text" class="form-control" id="telephone" name="telephone" placeholder="Entrez un numéro de téléphone" data-inputmask="'mask': ['09 99 99 99 99', '9999999999']" data-mask>
+                      </div>
+                    </div> 
+                  </div> 
+                  <div class="row">
+                    <div class="col-md-9">
+                      <div class="form-group">
+                        <label for="nom">Adresse<font color="red"> *</font></label>
+                        <input type="text" class="form-control" id="adresse" name="adresse" placeholder="Entrez une adresse">
+                      </div>
+                    </div> 
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="nom">Code postal<font color="red"> *</font></label>
+                        <input type="text" class="form-control" id="code_postal" name="code_postal" placeholder="Entrez un code postal">
+                      </div>
+                    </div> 
+                  </div> 
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer" style="text-align: center;">
+                  <input type="button" id="valideAddClient" class="btn btn-primary" value="Créer le client">
+                </div>
+              </form>
+            </div>
+            <!-- /.card -->
+          </div>
+          <div class="col-md-4">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Déjà client</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="nom">Nom<font color="red"> *</font></label>
+                        <input type="text" class="form-control" id="client_nom" name="client_nom" placeholder="Entrez un nom">
+                      </div>
+                    </div> 
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="nom">Prénom</label>
+                        <input type="text" class="form-control" id="client_prenom" name="client_prenom" placeholder="Entrez un prénom">
+                      </div>
+                    </div> 
+                  </div>
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer" style="text-align: center;">
+                  <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#modalChercherClient" id="chercherClient">Chercher le client</button>
+                </div>
+              </form>
+            </div>
+            <!-- /.card -->
+          </div>
+
+          <div class="col-md-4">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Rechercher une PEC</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="nom">Numéro de la PEC<font color="red"> *</font></label>
+                        <input type="text" class="form-control" id="num_pec" name="num_pec" placeholder="Entrez un numéro de PEC">
+                      </div>
+                    </div> 
+                  </div>
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer" style="text-align: center;">
+                  <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#modalChercherPEC" id="chercherPEC">Chercher la PEC</button>
+                </div>
+              </form>
+            </div>
+            <!-- /.card -->
+          </div>
+
+<!-- The Modal -->
+<div class="modal" id="modalChercherClient" data-keyboard="true" data-backdrop="static" role="dialog" tabindex='-1'>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Liste des clients</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body chercher-client">
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- The Modal -->
+<div class="modal" id="modalPEC" data-keyboard="true" data-backdrop="static" role="dialog" tabindex='-1'>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Création de la prise en charge</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body pec">
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- The Modal -->
+<div class="modal" id="modalInfoPEC" data-keyboard="true" data-backdrop="static" role="dialog" tabindex='-1'>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Information de la PEC :</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body modalInfoPEC">
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+        </div>
+      </div>
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="../plugins/jquery/jquery.min.js"></script>
+
+<!-- InputMask -->
+<script src="../plugins/moment/moment.min.js"></script>
+<script src="../plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../dist/js/adminlte.min.js"></script>
+<!-- Toastr -->
+<script src="../plugins/toastr/toastr.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../dist/js/demo.js"></script>
+
+</body>
+</html>

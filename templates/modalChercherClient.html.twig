@@ -1,0 +1,35 @@
+<script type="text/javascript" src="../dist/js/fiche_client/fiche_client.js"></script>
+<div class="row">
+<div class="col-md-12">
+{% if listeClients is not empty %}
+    {% for client in listeClients %}
+    <div class="row">
+        <div class="col-lg-12 col-12">
+        <!-- small card -->
+        <div class="small-box bg-info">
+            <div class="inner">
+            <h3>{{ client.nom }} {{ client.prenom }}</h3>
+
+            <p>Téléphone : {{ client.tel }}</p>
+            <p>Adresse : {{ client.adresse }}</p>
+            </div>
+            <div class="icon">
+            <i class="fas fa-user"></i>
+            </div>
+            <a href="#" id="{{ client.id }}" class="small-box-footer client">
+            Créer la PEC pour ce client <i class="fas fa-arrow-circle-right"></i>
+            </a>
+        </div>
+        </div>
+    </div>
+    {% endfor %}
+{% else %}
+    <div class="col-md-12">
+        <div class="alert alert-warning">
+            <h5><i class="icon fas fa-exclamation-triangle"></i> Alerte !</h5>
+            Aucun client trouvé !
+        </div>
+    </div>
+{% endif %}    
+</div>
+</div>
