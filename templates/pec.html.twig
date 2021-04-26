@@ -73,7 +73,8 @@
                                         <td>{{ pec.reparation }}</td>
                                         <td>{{ pec.prix }}€</td>
                                         <td>{{ pec.dateCreation }}</td>
-                                        <td><a href="#" style="margin-right:15px;color:#28c76f;"><i class="fas fa-check"></i></a><a href="#" class="success"><i class="fas fa-info"></i></a></td>
+                                        <td><a href="#" data-toggle="tooltip" data-placement="top" title="Valider la PEC" class="modalValiderPEC" style="margin-right:15px;color:#28c76f;" data-idPEC="{{ pec.idPec }}"><i class="fas fa-check"></i></a>
+                                            <a href="#" data-toggle="tooltip" data-placement="top" class="modalDetailsPEC" title="Détails de la PEC" data-idPEC="{{ pec.idPec }}"><i class="fas fa-info"></i></a></td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>
@@ -84,14 +85,72 @@
                 </div>
             </div>
         </div>
-
     </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
 </div>
 <!-- ./wrapper -->
+
+
+<!-- The Modal -->
+<div class="modal" id="modalValidPEC" data-keyboard="true" data-backdrop="static" role="dialog" tabindex='-1'>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Validation de la PEC</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body modalValidPEC">
+        <form action="#" id="formValiderPEC" method="post">
+          <input type="text" id="id_pec" name="id_pec" value="" hidden>
+          <label>Réparateur<font color="red"> *</font></label>
+          <select class="form-control" id="reparateur" name="reparateur">
+            <option></option>
+            {% for reparateur in listeReparateur %}
+              <option value="{{ reparateur.idUser }}">{{ reparateur.idUser }} - {{ reparateur.nom }} {{ reparateur.prenom }}</option>
+            {% endfor %}
+          </select>
+        </form>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" id="validerPEC" class="btn btn-success">Valider</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- The Modal -->
+<div class="modal" id="modalDetails" data-keyboard="true" data-backdrop="static" role="dialog" tabindex='-1'>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Détails de la PEC</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body modalDetails">
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <!-- jQuery -->
 <script src="../plugins/jquery/jquery.min.js"></script>

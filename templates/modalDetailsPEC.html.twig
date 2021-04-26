@@ -1,0 +1,47 @@
+<script type="text/javascript" src="../dist/js/fiche_client/fiche_client.js"></script>
+
+<div class="row" style="text-align: center;margin-bottom:10px">
+    <div class="col-md-4">
+        <label>Type :</label><span> {{ detailsPEC.type }}</span>
+    </div>
+    <div class="col-md-4">
+        <label>Marque :</label><span> {{ detailsPEC.marque }}</span>
+    </div>
+    <div class="col-md-4">
+        <label>Modèle :</label><span> {{ detailsPEC.modele }}</span>
+    </div>
+</div>
+<div class="row" style="text-align: center;margin-bottom:10px">
+    <div class="col-md-12">
+        <label>Eléments fournis :</label><span> {{ detailsPEC.elementsFournis }}</span>
+    </div>
+</div>
+<div class="row" style="text-align: center;margin-bottom:10px">
+    <div class="col-md-4">
+        <label>Code Dév. :</label><span> {% if detailsPEC.codeUnlock != "" %}{{ detailsPEC.codeUnlock }}{% else %}N/A{% endif %}</span>
+    </div>
+    <div class="col-md-4">
+        <label>Code SIM :</label><span> {% if detailsPEC.codeSIM != "" %}{{ detailsPEC.codeSIM }}{% else %}N/A{% endif %}</span>
+    </div>
+    <div class="col-md-4">
+        <label>IMEI :</label><span> {% if detailsPEC.imei != "" %}{{ detailsPEC.imei }}{% else %}N/A{% endif %}</span>
+    </div>
+</div>
+<div class="row" style="text-align: center;margin-bottom:10px">
+    <div class="col-md-12">
+        <label>Numéro de série :</label><span> {{ detailsPEC.serial }}</span>
+    </div>
+</div>
+<div class="row" style="text-align: center;margin-bottom:10px">
+    <div class="col-md-6">
+        <label>Type de réparation :</label><span> {{ detailsPEC.reparation }}</span>
+    </div>
+    <div class="col-md-6">
+        <label>Prix :</label><span> {{ detailsPEC.prix }}€</span>
+    </div>
+</div>
+<div class="row" style="text-align: center;margin-bottom:10px">
+    <div class="col-md-12">
+        <label>Information supp. :</label><span> {{ detailsPEC.infoSupp }}</span>
+    </div>
+</div>

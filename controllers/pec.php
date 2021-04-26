@@ -20,8 +20,10 @@ $loader = new FilesystemLoader(__DIR__ . '/../templates');
 $twig = new Environment($loader);
 
 $pecEnCours = pec::pecEnCours();
+$listeReparateur = pec::listeReparateurs();
 
 echo $twig->render('pec.html.twig', [
     "session" => $_SESSION,
-    "pecEnCours" => $pecEnCours
+    "pecEnCours" => $pecEnCours,
+    "listeReparateur" => $listeReparateur
 ]);

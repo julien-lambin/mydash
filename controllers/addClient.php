@@ -15,6 +15,6 @@ $addClient->code_postal=$_POST["code_postal"];
 
 $retour = clients::addClient($addClient);
 $retour = $retour[0]->id;
-error_log(print_r($retour,true));
+
 echo json_encode($retour);
 ?>
