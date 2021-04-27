@@ -11,11 +11,46 @@ $(document).ready(function () {
         fixedHeader: true,
         "paging": false,
         "lengthChange": false,
-        "searching": false,
+        "searching": true,
         "ordering": true,
         "info": true,
         "autoWidth": false,
         "responsive": true,
+    });
+
+
+    $("#pecTermine").DataTable({
+        language: {
+            url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
+        },
+        stateSave: false,
+        stateDuration: 0,
+        fixedHeader: true,
+        "paging": false,
+        "lengthChange": false,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+    });   
+
+
+    $("#pieces").change(function(e){
+        var liste_pieces = $(this).val()+"";
+        liste_pieces = liste_pieces.split(',');
+        
+        var autre = 0;
+        liste_pieces.forEach((piece) =>{
+            if(piece == "999999"){
+                $("#autre_piece").prop("readonly",false);
+                autre = 1;
+            }
+        });
+        if(autre == 0){
+            $("#autre_piece").val("");
+            $("#autre_piece").prop("readonly",true);
+        }
     });
 
 
@@ -24,6 +59,9 @@ $(document).ready(function () {
         //$(this).prop("disabled",true);
 
         $("#modalValidPEC").modal("show");
+
+        $('.select2').select2(); 
+
         $("#id_pec").val($(this).attr("data-idPEC"));
 
     });

@@ -109,4 +109,42 @@ class pec {
     }
 
 
+    static function pecTermine(){
+        global $bdd;
+        $resultat=array();
+
+        $listePecTermine=$bdd->prepare("SELECT pec.id_pec, pec.id_client, pec.type, pec.marque, pec.modele, pec.elements_fournis, pec.code_unlock, 
+                                pec.code_sim, pec.imei, pec.serial, pec.infos_supp, pec.prix, pec.etat, pec.date_creation, type_reparation.reparation
+                                FROM pec pec
+                                LEFT JOIN type_reparation type_reparation ON type_reparation.id=pec.type_reparation
+                                WHERE pec.etat = 1 ");
+        if($listePecTermine->execute()){
+            while ($listePecTermineBDD = $listePecTermine->fetchObject()) {
+
+                $pecTermine = new stdClass();
+
+                $pecTermine->idPec = $listePecTermineBDD->id_pec;
+                $pecTermine->idClient = $listePecTermineBDD->id_client;
+                $pecTermine->type = $listePecTermineBDD->type;
+                $pecTermine->marque = $listePecTermineBDD->marque;
+                $pecTermine->modele = $listePecTermineBDD->modele;
+                $pecTermine->elementsFournis = $listePecTermineBDD->elements_fournis;
+                $pecTermine->codeUnlock = $listePecTermineBDD->code_unlock;
+                $pecTermine->codeSim = $listePecTermineBDD->code_sim;
+                $pecTermine->imei = $listePecTermineBDD->imei;
+                $pecTermine->serial = $listePecTermineBDD->serial;
+                $pecTermine->infoSupp = $listePecTermineBDD->infos_supp;
+                $pecTermine->prix = $listePecTermineBDD->prix;
+                $pecTermine->etat = $listePecTermineBDD->etat;
+                $pecTermine->dateCreation = $listePecTermineBDD->date_creation;
+                $pecTermine->reparation = $listePecTermineBDD->reparation;
+
+                $resultat[]=$pecTermine;
+            }
+        }
+       
+        return $resultat;
+    }
+
+
 }

@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MyDash | PEC</title>
-
+<!-- jQuery -->
+<script src="../plugins/jquery/jquery.min.js"></script>
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -15,8 +16,11 @@
   <link rel="stylesheet" href="../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../dist/css/adminlte.css">
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
   <script type="text/javascript" src="../dist/js/pec/pec.js"></script>
+    <!-- Select2 -->
+    <script src="../plugins/select2/js/select2.full.min.js"></script>
+  <link rel="stylesheet" href="../plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 
 </head>
 <body class="hold-transition sidebar-mini {% if session.darkMode == "1" %}dark-mode{% endif %}">
@@ -38,53 +42,90 @@
 
     <!-- Main content -->
     <section class="content">
-
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card card-primary">
-                        <div class="card-header">
-                            <h3 class="card-title">Prise en charge en cours</h3>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <table id="pecEnCours" class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Num PEC</th>
-                                        <th>Num client</th>
-                                        <th>Type</th>
-                                        <th>Marque</th>
-                                        <th>Modèle</th>
-                                        <th>Type de répa.</th>
-                                        <th>Prix</th>
-                                        <th>Date</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                {% for pec in pecEnCours %}
-                                    <tr>
-                                        <td>{{ pec.idPec }}</td>
-                                        <td>{{ pec.idClient }}</td>
-                                        <td>{{ pec.type }}</td>
-                                        <td>{{ pec.marque }}</td>
-                                        <td>{{ pec.modele }}</td>
-                                        <td>{{ pec.reparation }}</td>
-                                        <td>{{ pec.prix }}€</td>
-                                        <td>{{ pec.dateCreation }}</td>
-                                        <td><a href="#" data-toggle="tooltip" data-placement="top" title="Valider la PEC" class="modalValiderPEC" style="margin-right:15px;color:#28c76f;" data-idPEC="{{ pec.idPec }}"><i class="fas fa-check"></i></a>
-                                            <a href="#" data-toggle="tooltip" data-placement="top" class="modalDetailsPEC" title="Détails de la PEC" data-idPEC="{{ pec.idPec }}"><i class="fas fa-info"></i></a></td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                        <!-- /.card -->
+          <div class="col-md-12">
+            <div class="card card-primary card-outline card-outline-tabs">
+              <div class="card-header p-0 border-bottom-0">
+                <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" data-toggle="pill" href="#ongletPecEnCours" role="tab" aria-controls="ongletPecEnCours" aria-selected="true">PEC En Cours</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="pill" href="#ongletPecTermine" role="tab" aria-controls="ongletPecTermine" aria-selected="false">PEC Terminé</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="card-body">
+                <div class="tab-content" id="custom-tabs-four-tabContent">
+                  <div class="tab-pane fade show active" id="ongletPecEnCours" role="tabpanel" aria-labelledby="ongletPecEnCours-tab">
+                    <table id="pecEnCours" class="table table-hover">
+                      <thead>
+                          <tr>
+                              <th>Num PEC</th>
+                              <th>Num client</th>
+                              <th>Type</th>
+                              <th>Marque</th>
+                              <th>Modèle</th>
+                              <th>Type de répa.</th>
+                              <th>Prix</th>
+                              <th>Date</th>
+                              <th>Action</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                      {% for pec in pecEnCours %}
+                        <tr>
+                            <td>{{ pec.idPec }}</td>
+                            <td>{{ pec.idClient }}</td>
+                            <td>{{ pec.type }}</td>
+                            <td>{{ pec.marque }}</td>
+                            <td>{{ pec.modele }}</td>
+                            <td>{{ pec.reparation }}</td>
+                            <td>{{ pec.prix }}€</td>
+                            <td>{{ pec.dateCreation }}</td>
+                            <td><a href="#" data-toggle="tooltip" data-placement="top" title="Valider la PEC" class="modalValiderPEC" style="margin-right:15px;color:#28c76f;" data-idPEC="{{ pec.idPec }}"><i class="fas fa-check"></i></a>
+                                <a href="#" data-toggle="tooltip" data-placement="top" class="modalDetailsPEC" title="Détails de la PEC" data-idPEC="{{ pec.idPec }}"><i class="fas fa-info"></i></a></td>
+                        </tr>
+                      {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="tab-pane fade" id="ongletPecTermine" role="tabpanel" aria-labelledby="ongletPecTermine-tab">
+                    <table id="pecTermine" class="table table-hover">
+                      <thead>
+                          <tr>
+                              <th>Num PEC</th>
+                              <th>Num client</th>
+                              <th>Type</th>
+                              <th>Marque</th>
+                              <th>Modèle</th>
+                              <th>Type de répa.</th>
+                              <th>Prix</th>
+                              <th>Date</th>
+                              <th>Action</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                      {% for pec in pecTermine %}
+                        <tr>
+                            <td>{{ pec.idPec }}</td>
+                            <td>{{ pec.idClient }}</td>
+                            <td>{{ pec.type }}</td>
+                            <td>{{ pec.marque }}</td>
+                            <td>{{ pec.modele }}</td>
+                            <td>{{ pec.reparation }}</td>
+                            <td>{{ pec.prix }}€</td>
+                            <td>{{ pec.dateCreation }}</td>
+                            <td><a href="#" data-toggle="tooltip" data-placement="top" class="modalDetailsPEC" title="Détails de la PEC" data-idPEC="{{ pec.idPec }}"><i class="fas fa-info"></i></a></td>
+                        </tr>
+                      {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
+              </div>
+              <!-- /.card -->
             </div>
-        </div>
+          </div>
     </section>
     <!-- /.content -->
   </div>
@@ -108,13 +149,39 @@
       <div class="modal-body modalValidPEC">
         <form action="#" id="formValiderPEC" method="post">
           <input type="text" id="id_pec" name="id_pec" value="" hidden>
-          <label>Réparateur<font color="red"> *</font></label>
-          <select class="form-control" id="reparateur" name="reparateur">
-            <option></option>
-            {% for reparateur in listeReparateur %}
-              <option value="{{ reparateur.idUser }}">{{ reparateur.idUser }} - {{ reparateur.nom }} {{ reparateur.prenom }}</option>
-            {% endfor %}
-          </select>
+          <div class="row">
+            <div class="col-md-12" style="margin-bottom:15px">
+              <label>Réparateur<font color="red"> *</font></label>
+              <select class="form-control" id="reparateur" name="reparateur">
+                <option></option>
+                {% for reparateur in listeReparateur %}
+                  <option value="{{ reparateur.idUser }}">{{ reparateur.idUser }} - {{ reparateur.nom }} {{ reparateur.prenom }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Pièce(s) Utilisé</label>
+                    <select class="form-control select2" id="pieces" name="pieces[]" style="width:100%" multiple="multiple">
+                        <option>Alabama</option>
+                        <option>Alaska</option>
+                        <option>California</option>
+                        <option>Delaware</option>
+                        <option>Tennessee</option>
+                        <option>Texas</option>
+                        <option value="999999">Autres (A Renseigner)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                <label for="nom">Autres pièces utilisé</label>
+                <input type="text" class="form-control" id="autre_piece" name="autre_piece" placeholder="Autres pièce utilisé" readonly>
+                </div>
+            </div> 
+          </div>
         </form>
       </div>
 
@@ -152,8 +219,7 @@
 </div>
 
 
-<!-- jQuery -->
-<script src="../plugins/jquery/jquery.min.js"></script>
+
 
 <!-- InputMask -->
 <script src="../plugins/moment/moment.min.js"></script>
@@ -175,8 +241,6 @@
 <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../dist/js/demo.js"></script>
 
 </body>
 </html>

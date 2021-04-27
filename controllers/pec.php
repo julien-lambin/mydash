@@ -22,8 +22,11 @@ $twig = new Environment($loader);
 $pecEnCours = pec::pecEnCours();
 $listeReparateur = pec::listeReparateurs();
 
+$pecTermine = pec::pecTermine();
+
 echo $twig->render('pec.html.twig', [
     "session" => $_SESSION,
     "pecEnCours" => $pecEnCours,
-    "listeReparateur" => $listeReparateur
+    "listeReparateur" => $listeReparateur,
+    "pecTermine" => $pecTermine
 ]);
